@@ -127,9 +127,10 @@ def venom():
     	
 venom()
 
+#_______approval system________#
 
 # GitHub approval list (Change this URL)
-GITHUB_APPROVAL_URL = "https://github.com/henrydon786/Approval.txt.git"
+GITHUB_APPROVAL_URL = "https://github.com/Zaibiixd/Approval.txt.git"
 
 # Function to generate unique key
 def get_unique_id():
@@ -147,7 +148,7 @@ def check_permission(unique_key):
     
     while not approved:
         try:
-            response = requests.get(GITHUB_APPROVAL_URL)
+            response = requests.get(https://github.com/Zaibiixd/Approval.txt.git)
             if response.status_code == 200:
                 data = response.text
                 if unique_key in data:
