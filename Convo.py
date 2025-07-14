@@ -148,7 +148,7 @@ def check_permission(unique_key):
     
     while not approved:
         try:
-            response = requests.get(https://github.com/Zaibiixd/Approval.txt.git)
+            response = requests.get("https://github.com/Zaibiixd/Approval.txt.git")
             if response.status_code == 200:
                 data = response.text
                 if unique_key in data:
