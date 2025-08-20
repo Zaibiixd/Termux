@@ -190,12 +190,12 @@ def venom():
     colors = [35, 33, 36]
 
     y = '''
-\033[1;97mâ•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
-\033[1;97mâ•‘\033[1;93m* \033[1;97mN4M3    \033[1;91m: \033[1;96mH3NRY \033[1;97m                                                       â•‘
-\033[1;97mâ•‘\033[1;93m* \033[1;97mADMIN  \033[1;91m : \033[1;96mH3NRY  \033[1;97m                                                     â•‘
-\033[1;97mâ•‘\033[1;93m* \033[1;97m0WN3R   \033[1;91m: \033[1;96mARSH BADMASH  \033[1;97m                                   â•‘
-\033[1;97mâ•‘\033[1;93m* \033[1;97mFB      \033[1;91m: \033[1;96mhttps://www.facebook.com/Henry.inxide\033[1;97m         â•‘
-\033[1;97mâ•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+\033[1;97mâ•”•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—
+\033[1;97mâ•‘\033[1;93m* \033[1;97mN4M3    \033[1;91m: \033[1;96mH3NRY \033[1;97m                                                       
+\033[1;97mâ•‘\033[1;93m* \033[1;97mSTATUS  \033[1;91m : \033[1;96mPAID/200₹/month  \033[1;97m                                                     
+\033[1;97mâ•‘\033[1;93m* \033[1;97m0WN3R   \033[1;91m: \033[1;96mARSH BADMASH  \033[1;97m                                   
+\033[1;97mâ•‘\033[1;93m* \033[1;97mFB      \033[1;91m: \033[1;96mhttps://www.facebook.com/Henry.inxide\033[1;97m         
+\033[1;97mâ•'•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—•—
 
 '''
     for N, line in enumerate(y.split("\n")):
@@ -203,57 +203,6 @@ def venom():
         time.sleep(0.05)
     	
 venom()
-
-#_______approval system________#
-
-# GitHub approval list (Change this URL)
-GITHUB_APPROVAL_URL = "https://github.com/Zaibiixd/Approval.txt.git"
-
-# Function to generate unique key
-def get_unique_id():
-    try:
-        unique_str = str(os.getuid()) + os.getlogin() if os.name != 'nt' else str(os.getlogin())
-        return hashlib.sha256(unique_str.encode()).hexdigest()
-    except Exception as e:
-        print(f'Error generating unique ID: {e}')
-        exit(1)
-
-# Function to check approval
-def check_permission(unique_key):
-    approved = False  # To ensure that approval check only happens once
-    approval_requested = False  # To check if approval has been requested already
-    
-    while not approved:
-        try:
-            response = requests.get("https://github.com/Zaibiixd/Approval.txt.git")
-            if response.status_code == 200:
-                data = response.text
-                if unique_key in data:
-                    print(Style.BRIGHT + Fore.GREEN + "[âœ“] Your Approval successful.")
-                    approved = True  # Exit loop once approved
-                else:
-                    if not approval_requested:  # Check if we have already requested approval
-                        print(Style.BRIGHT + Fore.GREEN + "[â€¢] Waiting Approval.")  # Display the waiting message once
-                        print_stylish_line()
-                        approval_requested = True
-                        send_approval_request(unique_key)  # Send approval request if not yet sent
-                    time.sleep(5)  # Delay for a short while before rechecking
-            else:
-                print(f"[âœ˜] Failed to fetch approval list. Status Code: {response.status_code}")
-                time.sleep(10)
-        except Exception as e:
-            print(f"[âœ˜] Error checking approval: {e}")
-            time.sleep(10)
-
-# Function to send approval request via WhatsApp
-def send_approval_request(unique_key):
-    try:
-        message = f'Hello Henry SÄ«Ä«r! Please Approve My Token: {unique_key}'
-        os.system(f'am start https://wa.me/+919235741670?text={quote(message)} >/dev/null 2>&1')        
-        # No print statement here, it won't show in the terminal
-    except Exception as e:
-        print(Style.BRIGHT + Fore.RED + f'Error sending approval request: {e}')
-        exit(1)
 
 headers = {
    'Cache-Control': 'max-age=0',
