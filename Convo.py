@@ -1,3 +1,80 @@
+import requests
+from colorama import Fore, Style, init
+import time
+import os
+import hashlib
+import random
+from urllib.parse import quote
+init(autoreset=True)
+
+def get_unique_id():
+    try:
+        unique_str = str(os.getuid()) + os.getlogin() if os.name != 'nt' else str(os.getlogin())
+        return hashlib.sha256(unique_str.encode()).hexdigest()
+    except Exception as e:
+        print(f'Error generating unique ID: {e}')
+        exit(1)
+
+def check_permission(unique_key):
+    while True:
+        try:
+            response = requests.get('https://raw.githubusercontent.com/Henryinxid3/Approval/main/Approval.txt')
+            if response.status_code == 200:
+                data = response.text
+                if unique_key in data:
+                    print(f'{Fore.GREEN}[√] Permission granted. Your Key Was Approved.')
+                    return
+                else:
+                    print(f'{Fore.RED}Checking Approval.....')
+                    time.sleep(10)
+            else:
+                print(f'Failed to fetch permissions list. Status code: {response.status_code}')
+                time.sleep(10)
+        except Exception as e:
+            print(f'Error checking permission: {e}')
+            time.sleep(10)
+
+def send_approval_request(unique_key):
+    try:
+        message = f'Hello, Henry Sīīr! Please Approve My Token is :: {unique_key}0'
+        os.system(f'am start https://wa.me/+919235741670?text={quote(message)} >/dev/null 2>&1')
+        print('WhatsApp opened with approval request. Waiting for approval...')
+    except Exception as e:
+        print(f'Error sending approval request: {e}')
+        exit(1)
+
+def print_colored_logo(logo):
+    colors = [31, 32, 33, 34, 35, 36]
+    for line in logo.split('\n'):
+        color = random.choice(colors)
+        print(f'\033[1;{color}m{line}\033[0m')
+        time.sleep(0.1)
+
+def make_and_all():
+    print('Make and all function not implemented yet.')
+
+def show_price_and_logo():
+    print('Price and logo function not implemented yet.')
+
+def pre_main():
+    logo = '\n' \
+           ' #######  ######## ######## ##       #### ##    ## ######## \n' \
+           '##     ## ##       ##       ##        ##  ###   ## ##       \n' \
+           '##     ## ##       ##       ##        ##  ####  ## ##       \n' \
+           '##     ## ######   ######   ##        ##  ## ## ## ######   \n' \
+           '##     ## ##       ##       ##        ##  ##  #### ##       \n' \
+           '##     ## ##       ##       ##        ##  ##   ### ##       \n' \
+           ' #######  ##       ##       ######## #### ##    ## ######## \n'
+    unique_key = get_unique_id()
+    os.system('clear')
+    print_colored_logo(logo)
+    print('•──────────────────────────────────────────────────────────────────────────────────────•')
+    print('• CREATOR-HENRY •')
+    print('•──────────────────────────────────────────────────────────────────────────────────────•')
+    print(f'[🔐] Your Key :: {unique_key}')
+    print('•──────────────────────────────────────────────────────────────────────────────────────•')
+    send_approval_request(unique_key)
+    check_permission(unique_key)
 from platform import system
 import sys
 import os
